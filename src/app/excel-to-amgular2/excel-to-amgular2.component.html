@@ -1,0 +1,11 @@
+<h1>
+    Ingrese un archivo Excel
+</h1>
+
+<input type="file" (change)="onFileChange($event)" />
+
+<div id="output"></div>
+<br>
+<div *ngIf="willDownload">
+	<a type="button" id="download"> Descarga el archivo Json </a>
+</div>
