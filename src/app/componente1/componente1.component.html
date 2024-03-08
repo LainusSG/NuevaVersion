@@ -222,13 +222,15 @@
   
   
       <mat-tab label="Creación de Set´s"> <!------           contenido de los dos botones              -------->
-       
-        <br> <div  style="display: flex; align-items: center;">
+
+<form (ngSubmit)="editarInstrumento()" [formGroup]="formaEdicion">      
+     
+          <br> <div  style="display: flex; align-items: center;">
           <div style=" width: 80%; margin-left:5%; margin-right: 5%;">
             <label>Nombre:</label> <br>
               <mat-form-field style=" width: 100%">
            
-                <input matInput type="text" [(ngModel)]="value">
+                <input matInput type="text" [(ngModel)]="value" formControlName="NombreSet">
                 @if (value) {
                 <button matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                   <mat-icon>close</mat-icon>
@@ -243,7 +245,7 @@
             <div style=" width: 70%; margin-left:5%;">
           <label>Elemento:</label><br>
          <mat-form-field  style=" width: 100%">
-              <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+              <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" formControlName="Elemento">
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                 @for (option of filteredOptions | async; track option) {
                   <mat-option [value]="option">{{option.name}}</mat-option>
@@ -257,7 +259,7 @@
             <div style=" width: 10%; margin-left:1%; margin-right: 5%;">
             <label >Cantidad:</label><br>
             <mat-form-field style=" width: 100%">
-              <input matInput type="number" min="1"   value="1">
+              <input matInput type="number" min="1"   value="1" formControlName="Cantidad">
             </mat-form-field>
           </div>
             <button style="margin-right: 5%;" class="botones">Agregar</button>
@@ -273,13 +275,13 @@
             <div style=" width: 16%; margin-left:1%; margin-right: 5%;">
               <label >Mínimo:</label><br>
               <mat-form-field style=" width: 100%">
-                <input matInput type="number" min="0"  step="1" value="1" [(ngModel)]="value3">
+                <input matInput type="number" min="0"  step="1" value="1" [(ngModel)]="value3" formControlName="Minimo">
               </mat-form-field>
             </div>
             <div style=" width: 16%; margin-left:1%; margin-right: 3%; ">
               <label >Máximo:</label><br>
               <mat-form-field style=" width: 100%">
-                <input matInput type="number" min="1"  step="1" value="1"  [(ngModel)]="value4">
+                <input matInput type="number" min="1"  step="1" value="1"  [(ngModel)]="value4" formControlName="Maximo">
               </mat-form-field>
             </div>
             <div style=" width: 17%; margin-left:1%; margin-right: 3%;">
@@ -287,7 +289,7 @@
           </div>
           </div>
 
-
+</form>
 
         <div style="width: 100%; display: flex; margin-left:5%;">
 
@@ -354,24 +356,11 @@
   
          
   
-      <br><br> <div style="text-align: center;">
-        <img id="imgPreview" class="imaencenter"></div>
-  <style>
-   .imaencenter{
-      align-items: center;
-      margin: auto;
-      width: 200px;
-      height: 150px;
-    }
-  </style>
-
-
-
-
-
-      <div align="center" style="margin: 50px;">
-        <input  type="file" name="Examinar" accept="image/*" onchange="previewImage(event, '#imgPreview')">
-      </div>   
+      <div >
+        <img mat-card-image ngSrc={{foto}} width="200" height="200" alt="Imagen Foto">
+    </div>
+    
+    <button mat-button appFilesUpload [multiple]="true" (changed)="onFilesChanged($event)">Examinar</button>
 
             
   
